@@ -1,6 +1,5 @@
 package com.configure.xmlparse.impl;
 
-import java.util.Iterator;
 import java.util.Map;
 
 import org.dom4j.Element;
