@@ -1,20 +1,13 @@
 package com.configure.callproxy.impl;
 
-import java.io.File;
-
-import org.dom4j.Document;
-import org.dom4j.DocumentException;
-import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
-
 import com.configure.invoker.Invoker;
-import com.configure.xmlparse.XmlParse;
+import com.configure.xmlparse.XmlParseData;
 
 public class CallProxy {
 	
 	private Invoker invoke;
 	
-	private XmlParse xmlparse;
+	private XmlParseData parseData;
 
 	public Invoker getInvoke() {
 		return invoke;
@@ -24,19 +17,13 @@ public class CallProxy {
 		this.invoke = invoke;
 	}
 
-	public XmlParse getXmlparse() {
-		return xmlparse;
+	public XmlParseData getParseData() {
+		return parseData;
 	}
 
-	public void setXmlparse(XmlParse xmlparse) {
-		this.xmlparse = xmlparse;
+	public void setParseData(XmlParseData parseData) {
+		this.parseData = parseData;
 	}
-	
-	public void parseXml(String xmlBody) throws DocumentException {
-		SAXReader reader = new SAXReader();
-		Document document = reader.read(new File(xmlBody));
-		Element root = document.getRootElement();
-		xmlparse.parse(root);
-	}
+
 	
 }

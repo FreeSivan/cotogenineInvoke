@@ -10,12 +10,14 @@ import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
+import com.configure.callproxy.ICallProxy;
 import com.configure.exception.InvokerIDconfilct;
-import com.configure.invoker.Invoker;
 import com.configure.xmlparse.XmlParse;
+import com.configure.xmlparse.impl.DispatchXmlParse;
 
 public class CIContext {
-	private Map<String, Invoker> cpMap = new HashMap<String, Invoker>();
+	
+	private Map<String, ICallProxy> cpMap = new HashMap<String, ICallProxy>();
 
 	private XmlParse xmlparse;
 	
@@ -25,11 +27,11 @@ public class CIContext {
 	 * @param invoker
 	 * @throws InvokerIDconfilct
 	 */
-	public void addInvoker(String invokerName, Invoker invoker) throws InvokerIDconfilct {
+	public void addInvoker(String invokerName, ICallProxy callProxy) throws InvokerIDconfilct {
 		if (cpMap.containsKey(invokerName)) {
 			throw new InvokerIDconfilct();
 		}
-		getCpMap().put(invokerName, invoker);
+		getCpMap().put(invokerName, callProxy);
 	}
 
 	/**
@@ -41,21 +43,23 @@ public class CIContext {
 		SAXReader reader = new SAXReader();
 		Document document = reader.read(new File(xmlfile));
 		Element root = document.getRootElement();
-		
+		System.out.println("root name = "+root.getName());
 		@SuppressWarnings("unchecked")
 		Iterator<Element> iterator = root.elementIterator();
 		while (iterator.hasNext()) {
 			Element element = iterator.next();
+			System.out.println("element = "+element.getName());
 			if ("invoke".equals(element.getName())) {
 				String id = element.attribute("id").getText();
-				
+				System.out.println("id = " + id);
 			}
+			xmlparse.parse(element);
+			System.out.println("------------------------------");
 		}
 		
-		xmlparse.parse(root);
 	}
 	
-	public Map<String, Invoker> getCpMap() {
+	public Map<String, ICallProxy> getCpMap() {
 		return cpMap;
 	}
 
@@ -65,5 +69,11 @@ public class CIContext {
 
 	public void setXmlparse(XmlParse xmlparse) {
 		this.xmlparse = xmlparse;
+	}
+	
+	public static void main(String[] args) throws DocumentException {
+		CIContext context = new CIContext();
+		context.setXmlparse(new DispatchXmlParse());
+		context.parseXml("ciconf.xml");
 	}
 }

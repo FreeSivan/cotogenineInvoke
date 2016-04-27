@@ -1,0 +1,85 @@
+<CIConfigure>
+	<invoke id="1">
+		<protocol name="http">
+			<url>usr1</url>
+			<method>method1</method>
+			<params>
+				<param>
+					<paramIndex>index11</paramIndex>
+					<paramName>name11</paramName>
+					<paramType>type11</paramType>
+					<paramValue>value11</paramValue>
+				</param>
+				<param>
+					<paramIndex>index12</paramIndex>
+					<paramName>name12</paramName>
+					<paramType>type12</paramType>
+					<paramValue>value12</paramValue>
+				</param>
+			</params>
+			<returnValues>
+				<returnValue>
+					<name>retName1</name>
+					<type>retType1</type>
+					<value>retValue1</value>
+				</returnValue>
+			</returnValues>
+		</protocol>
+	</invoke>
+	
+	<invoke id="2">
+		<protocol name="http">
+			<url>url2</url>
+			<method>method2</method>
+			<params>
+				<param>
+					<paramIndex>index21</paramIndex>
+					<paramName>name21</paramName>
+					<paramType>type21</paramType>
+					<paramValue>value21</paramValue>
+				</param>
+				<param>
+					<paramIndex>index21</paramIndex>
+					<paramName>name21</paramName>
+					<paramType>type21</paramType>
+					<paramValue>value21</paramValue>
+				</param>
+			</params>
+			<returnValues>
+				<returnValue>
+					<name>retName2</name>
+					<type>retType2</type>
+					<value>retValue2</value>
+				</returnValue>
+			</returnValues>
+		</protocol>
+	</invoke>
+	
+	<invoke id="3">
+		<protocol name="http">
+			<url>url3</url>
+			<method>method3</method>
+			<params>
+				<param>
+					<paramIndex>index31</paramIndex>
+					<paramName>name31</paramName>
+					<paramType>type31</paramType>
+					<paramValue>value31</paramValue>
+				</param>
+				<param>
+					<paramIndex>index32</paramIndex>
+					<paramName>name32</paramName>
+					<paramType>type32</paramType>
+					<paramValue>value32</paramValue>
+				</param>
+			</params>
+			<returnValues>
+				<returnValue>
+					<name>retName3</name>
+					<type>retType3</type>
+					<value>retValue3</value>
+				</returnValue>
+			</returnValues>
+		</protocol>
+	</invoke>
+</CIConfigure>
