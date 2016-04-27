@@ -9,13 +9,13 @@
         
         <bean class="com.configure.xmlparse.impl.HttpXmlParse" id="httpXmlParse"/>
         <bean class="com.configure.xmlparse.impl.DispatchXmlParse" id="dispatchXmlParse">
-        	<property name="xmlParseMap">  
+			<property name="xmlParseMap">  
 				<map>  
 					<entry key="http">
 						<ref local="httpXmlParse"/>
 					</entry>
 				</map>  
-        	</property>  
+			</property>  
 		</bean>
 		<bean class="com.configure.cicontext.CIContext" id="context">
 			<property name="xmlparse" ref="dispatchXmlParse"/>
