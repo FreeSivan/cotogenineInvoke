@@ -17,9 +17,9 @@ public class DispatchXmlParse implements XmlParse{
 
 	private Map<String, XmlParse> xmlParseMap;
 	
-	private final String ATTRIBUTE_TAG = "name";
+	private static final String ATTRIBUTE_TAG = "name";
 	
-	private final String ELEMENT_TAG = "protocol";
+	private static final String ELEMENT_TAG = "protocol";
 	
 	public XmlParseData parse(Element body) {
 		Element element = body.element(ELEMENT_TAG);
