@@ -1,9 +1,13 @@
 package com.configure.callproxy.impl;
 
+import java.util.Map;
+
+import com.configure.callproxy.ICallProxy;
 import com.configure.invoker.Invoker;
+import com.configure.metadata.MetaDataInput;
 import com.configure.xmlparse.XmlParseData;
 
-public class CallProxy {
+public class CallProxy implements ICallProxy{
 	
 	private Invoker invoke;
 	
@@ -25,5 +29,9 @@ public class CallProxy {
 		this.parseData = parseData;
 	}
 
-	
+	@Override
+	public void call(Map<Integer, MetaDataInput> input) {
+		
+	}
+
 }
