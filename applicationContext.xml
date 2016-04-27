@@ -7,17 +7,17 @@
 		http://www.springframework.org/schema/context  
         http://www.springframework.org/schema/context/spring-context-3.0.xsd">   
         
-        <bean class="com.configure.xmlparse.impl.HttpXmlParse" id="httpXmlParse"/>
-        <bean class="com.configure.xmlparse.impl.DispatchXmlParse" id="dispatchXmlParse">
-			<property name="xmlParseMap">  
-				<map>  
-					<entry key="http">
-						<ref local="httpXmlParse"/>
-					</entry>
-				</map>  
-			</property>  
-		</bean>
-		<bean class="com.configure.cicontext.CIContext" id="context">
-			<property name="xmlparse" ref="dispatchXmlParse"/>
-		</bean>
+	<bean class="com.configure.xmlparse.impl.HttpXmlParse" id="httpXmlParse"/>
+	<bean class="com.configure.xmlparse.impl.DispatchXmlParse" id="dispatchXmlParse">
+		<property name="xmlParseMap">  
+			<map>  
+				<entry key="http">
+					<ref local="httpXmlParse"/>
+				</entry>
+			</map>  
+		</property>  
+	</bean>
+	<bean class="com.configure.cicontext.CIContext" id="context">
+		<property name="xmlparse" ref="dispatchXmlParse"/>
+	</bean>
 </beans>
