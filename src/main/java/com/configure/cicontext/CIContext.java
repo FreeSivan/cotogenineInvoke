@@ -12,6 +12,7 @@ import org.dom4j.io.SAXReader;
 
 import com.configure.callproxy.ICallProxy;
 import com.configure.exception.InvokerIDconfilct;
+import com.configure.metadata.MetaDataRet;
 import com.configure.xmlparse.XmlParse;
 import com.configure.xmlparse.XmlParseData;
 
@@ -51,8 +52,23 @@ public class CIContext {
 				continue;
 			}
 			XmlParseData parseData = xmlparse.parse(element);
+			String invokeID = element.attribute("id").getName();
 			System.out.println("method = " + parseData.getOtherData().getFromDataMap("method"));
 			System.out.println("url    = " + parseData.getOtherData().getFromDataMap("url"));
+			
+			for (String key : parseData.getParamData().keySet()) {
+				String name = parseData.getParamData().get(key).getParamName();
+				String type = parseData.getParamData().get(key).getParamType();
+				String value = parseData.getParamData().get(key).getParamType();
+				System.out.println("index = "+key+" name="+name+" type="+type + " value="+value);
+			}
+			
+			for (String key : parseData.getRetData().keySet()) {
+				String name = key;
+				String type = parseData.getRetData().get(key).getRetType();
+				String value = parseData.getRetData().get(key).getRetVal();
+				System.out.println("name = "+name+" type="+type+" value="+value);
+			}
 			
 			System.out.println("------------------------------");
 		}
