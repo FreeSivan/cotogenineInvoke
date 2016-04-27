@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+		xmlns="http://www.springframework.org/schema/beans"
+		xmlns:context="http://www.springframework.org/schema/context"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context  
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd">   
+        
+        <bean class="com.configure.xmlparse.impl.HttpXmlParse" id="httpXmlParse"/>
+        <bean class="com.configure.xmlparse.impl.DispatchXmlParse" id="dispatchXmlParse">
+        	<property name="xmlParseMap">  
+				<map>  
+					<entry key="http">
+						<ref local="httpXmlParse"/>
+					</entry>
+				</map>  
+        	</property>  
+		</bean>
+		<bean class="com.configure.cicontext.CIContext" id="context">
+			<property name="xmlparse" ref="dispatchXmlParse"/>
+		</bean>
+</beans>

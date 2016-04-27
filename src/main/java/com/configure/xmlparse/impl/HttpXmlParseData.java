@@ -10,7 +10,7 @@ import com.configure.xmlparse.XmlParseData;
 
 public class HttpXmlParseData implements XmlParseData{
 	
-	private MetaDataOther otherdata;
+	private MetaDataOther otherdata = new MetaDataOther();
 	
 	private Map<String, MetaDataParam> paramMap = new HashMap<>();
 	

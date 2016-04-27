@@ -13,7 +13,7 @@ import org.dom4j.io.SAXReader;
 import com.configure.callproxy.ICallProxy;
 import com.configure.exception.InvokerIDconfilct;
 import com.configure.xmlparse.XmlParse;
-import com.configure.xmlparse.impl.DispatchXmlParse;
+import com.configure.xmlparse.XmlParseData;
 
 public class CIContext {
 	
@@ -43,20 +43,19 @@ public class CIContext {
 		SAXReader reader = new SAXReader();
 		Document document = reader.read(new File(xmlfile));
 		Element root = document.getRootElement();
-		System.out.println("root name = "+root.getName());
 		@SuppressWarnings("unchecked")
 		Iterator<Element> iterator = root.elementIterator();
 		while (iterator.hasNext()) {
 			Element element = iterator.next();
-			System.out.println("element = "+element.getName());
-			if ("invoke".equals(element.getName())) {
-				String id = element.attribute("id").getText();
-				System.out.println("id = " + id);
+			if (!"invoke".equals(element.getName())) {
+				continue;
 			}
-			xmlparse.parse(element);
+			XmlParseData parseData = xmlparse.parse(element);
+			System.out.println("method = " + parseData.getOtherData().getFromDataMap("method"));
+			System.out.println("url    = " + parseData.getOtherData().getFromDataMap("url"));
+			
 			System.out.println("------------------------------");
 		}
-		
 	}
 	
 	public Map<String, ICallProxy> getCpMap() {
@@ -71,9 +70,4 @@ public class CIContext {
 		this.xmlparse = xmlparse;
 	}
 	
-	public static void main(String[] args) throws DocumentException {
-		CIContext context = new CIContext();
-		context.setXmlparse(new DispatchXmlParse());
-		context.parseXml("ciconf.xml");
-	}
 }
