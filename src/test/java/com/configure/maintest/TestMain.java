@@ -10,7 +10,7 @@ import org.springframework.context.support.FileSystemXmlApplicationContext;
 import com.configure.callproxy.ICallProxy;
 import com.configure.cicontext.CIContext;
 import com.configure.exception.InvokerIDconfilct;
-import com.configure.xmlparse.XmlParseData;
+import com.configure.metadata.XmlParseData;
 
 public class TestMain {
 	private CIContext context;
@@ -34,20 +34,20 @@ public class TestMain {
 		for (String key1 : cpMap.keySet()) {
 			ICallProxy callProxy = cpMap.get(key1);
 			XmlParseData parseData = callProxy.getParseData();
-			System.out.println("method = " + parseData.getOtherData().getFromDataMap("method"));
-			System.out.println("url    = " + parseData.getOtherData().getFromDataMap("url"));
+			System.out.println("method = " + parseData.getOtherdata().getFromDataMap("method"));
+			System.out.println("url    = " + parseData.getOtherdata().getFromDataMap("url"));
 			
-			for (String key : parseData.getParamData().keySet()) {
-				String name = parseData.getParamData().get(key).getParamName();
-				String type = parseData.getParamData().get(key).getParamType();
-				String value = parseData.getParamData().get(key).getParamType();
+			for (String key : parseData.getParamMap().keySet()) {
+				String name = parseData.getParamMap().get(key).getParamName();
+				String type = parseData.getParamMap().get(key).getParamType();
+				String value = parseData.getParamMap().get(key).getParamType();
 				System.out.println("index  = "+key+" name = "+name+" type = "+type + " value = "+value);
 			}
 			
-			for (String key : parseData.getRetData().keySet()) {
+			for (String key : parseData.getRetMap().keySet()) {
 				String name = key;
-				String type = parseData.getRetData().get(key).getRetType();
-				String value = parseData.getRetData().get(key).getRetVal();
+				String type = parseData.getRetMap().get(key).getRetType();
+				String value = parseData.getRetMap().get(key).getRetVal();
 				System.out.println("name   = "+name+" type = "+type+" value = "+value);
 			}
 			System.out.println("-----------------------------------------------------------");

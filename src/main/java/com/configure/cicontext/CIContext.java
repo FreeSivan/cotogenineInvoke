@@ -11,10 +11,10 @@ import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
 import com.configure.callproxy.ICallProxy;
-import com.configure.callproxy.impl.CallProxy;
+import com.configure.callproxy.impl.HttpCallProxy;
 import com.configure.exception.InvokerIDconfilct;
+import com.configure.metadata.XmlParseData;
 import com.configure.xmlparse.XmlParse;
-import com.configure.xmlparse.XmlParseData;
 
 public class CIContext {
 	
@@ -54,7 +54,7 @@ public class CIContext {
 			}
 			XmlParseData parseData = xmlparse.parse(element);
 			String invokeID = element.attribute("id").getText();
-			ICallProxy callProxy = new CallProxy();
+			ICallProxy callProxy = new HttpCallProxy();
 			callProxy.setParseData(parseData);
 			addInvoker(invokeID, callProxy);
 		}

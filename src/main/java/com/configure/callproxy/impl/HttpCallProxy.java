@@ -5,9 +5,9 @@ import java.util.Map;
 import com.configure.callproxy.ICallProxy;
 import com.configure.invoker.Invoker;
 import com.configure.metadata.MetaDataInput;
-import com.configure.xmlparse.XmlParseData;
+import com.configure.metadata.XmlParseData;
 
-public class CallProxy implements ICallProxy{
+public class HttpCallProxy implements ICallProxy{
 	
 	private Invoker invoke;
 	

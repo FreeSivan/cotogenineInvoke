@@ -6,8 +6,8 @@ import org.dom4j.Element;
 
 import com.configure.metadata.MetaDataParam;
 import com.configure.metadata.MetaDataRet;
+import com.configure.metadata.XmlParseData;
 import com.configure.xmlparse.XmlParse;
-import com.configure.xmlparse.XmlParseData;
 
 public class HttpXmlParse implements XmlParse{
 	
@@ -34,8 +34,9 @@ public class HttpXmlParse implements XmlParse{
 	private static final String RETVALUE_TAG = "value";
 	
 	@SuppressWarnings("unchecked")
+	@Override
 	public XmlParseData parse(Element body) {
-		XmlParseData parseData = new HttpXmlParseData();
+		XmlParseData parseData = new XmlParseData();
 		Iterator<Element> iterator = body.elementIterator();
 		while(iterator.hasNext()) {
 			Element element = iterator.next();
@@ -48,7 +49,7 @@ public class HttpXmlParse implements XmlParse{
 			else {
 				String name = element.getName();
 				String value = element.getTextTrim();
-				parseData.getOtherData().addToDataMap(name, value);
+				parseData.getOtherdata().addToDataMap(name, value);
 			}
 		}
 		return parseData;
@@ -71,7 +72,7 @@ public class HttpXmlParse implements XmlParse{
 			ret.setRetName(item.element(RETNAME_TAG).getTextTrim());
 			ret.setRetType(item.element(RETTYPE_TAG).getTextTrim());
 			ret.setRetVal(item.element(RETVALUE_TAG).getTextTrim());
-			parseData.getRetData().put(ret.getRetName(), ret);
+			parseData.getRetMap().put(ret.getRetName(), ret);
 		}
 	}
 
@@ -93,7 +94,7 @@ public class HttpXmlParse implements XmlParse{
 			data.setParamType(param.element(PARAMTYPE_TAG).getTextTrim());
 			data.setParamName(param.element(PARAMNAME_TAG).getTextTrim());
 			data.setParamValue(param.element(PARAMVALUE_TAG).getTextTrim());
-			parseData.getParamData().put(data.getParamIndex(), data);
+			parseData.getParamMap().put(data.getParamIndex(), data);
 		}
 	}
 

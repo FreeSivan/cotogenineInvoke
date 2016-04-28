@@ -4,8 +4,9 @@ import java.util.Map;
 
 import org.dom4j.Attribute;
 import org.dom4j.Element;
+
+import com.configure.metadata.XmlParseData;
 import com.configure.xmlparse.XmlParse;
-import com.configure.xmlparse.XmlParseData;
 /**
  * 
  * @author xiwen.yxw

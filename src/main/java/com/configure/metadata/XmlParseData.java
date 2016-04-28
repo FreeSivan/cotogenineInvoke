@@ -1,20 +1,17 @@
-package com.configure.xmlparse.impl;
+package com.configure.metadata;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import com.configure.metadata.MetaDataOther;
-import com.configure.metadata.MetaDataParam;
-import com.configure.metadata.MetaDataRet;
-import com.configure.xmlparse.XmlParseData;
-
-public class HttpXmlParseData implements XmlParseData{
+public class XmlParseData {
 	
 	private MetaDataOther otherdata = new MetaDataOther();
 	
 	private Map<String, MetaDataParam> paramMap = new HashMap<>();
 	
 	private Map<String, MetaDataRet> retMap = new HashMap<>();
+	
+	private String protocolName;
 
 	public MetaDataOther getOtherdata() {
 		return otherdata;
@@ -40,19 +37,12 @@ public class HttpXmlParseData implements XmlParseData{
 		this.paramMap = paramMap;
 	}
 
-	@Override
-	public MetaDataOther getOtherData() {
-		return getOtherdata();
+	public String getProtocolName() {
+		return protocolName;
 	}
 
-	@Override
-	public Map<String, MetaDataParam> getParamData() {
-		return getParamMap();
-	}
-
-	@Override
-	public Map<String, MetaDataRet> getRetData() {
-		return getRetMap();
+	public void setProtocolName(String protocolName) {
+		this.protocolName = protocolName;
 	}
 	
 }

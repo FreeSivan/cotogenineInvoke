@@ -4,7 +4,7 @@ import java.util.Map;
 
 import com.configure.invoker.Invoker;
 import com.configure.metadata.MetaDataInput;
-import com.configure.xmlparse.XmlParseData;
+import com.configure.metadata.XmlParseData;
 
 public interface ICallProxy {
 	public void call(Map<Integer, MetaDataInput> input);
