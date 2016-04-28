@@ -3,6 +3,7 @@ package com.configure.cicontext;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import org.dom4j.Document;
@@ -13,6 +14,7 @@ import org.dom4j.io.SAXReader;
 import com.configure.callproxy.ICallProxy;
 import com.configure.callproxy.impl.HttpCallProxy;
 import com.configure.exception.InvokerIDconfilct;
+import com.configure.metadata.MetaDataInput;
 import com.configure.metadata.XmlParseData;
 import com.configure.xmlparse.XmlParse;
 
@@ -58,6 +60,15 @@ public class CIContext {
 			callProxy.setParseData(parseData);
 			addInvoker(invokeID, callProxy);
 		}
+	}
+	
+	
+	public void mainCall(String id, List<MetaDataInput> lst) {
+		Map<Integer, MetaDataInput> map = new HashMap<>();
+		for (MetaDataInput item : lst) {
+			map.put(item.getIndex(), item);
+		}
+		cpMap.get(id).call(map);
 	}
 	
 	public Map<String, ICallProxy> getCpMap() {

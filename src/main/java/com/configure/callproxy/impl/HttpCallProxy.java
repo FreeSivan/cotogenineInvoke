@@ -31,7 +31,13 @@ public class HttpCallProxy implements ICallProxy{
 
 	@Override
 	public void call(Map<Integer, MetaDataInput> input) {
-		
+		for (Integer item : input.keySet()) {
+			System.out.println("item = "+item);
+			Class<?> clazz = input.get(item).getClazz();
+			Object object = input.get(item).getObject();
+			System.out.println("class = "+clazz.getName());
+			System.out.println("value = "+clazz.cast(object));
+		}
 	}
 
 }

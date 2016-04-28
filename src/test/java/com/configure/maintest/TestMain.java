@@ -1,5 +1,7 @@
 package com.configure.maintest;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.dom4j.DocumentException;
@@ -10,6 +12,7 @@ import org.springframework.context.support.FileSystemXmlApplicationContext;
 import com.configure.callproxy.ICallProxy;
 import com.configure.cicontext.CIContext;
 import com.configure.exception.InvokerIDconfilct;
+import com.configure.metadata.MetaDataInput;
 import com.configure.metadata.XmlParseData;
 
 public class TestMain {
@@ -21,6 +24,20 @@ public class TestMain {
 
 	public void setContext(CIContext context) {
 		this.context = context;
+	}
+	
+	
+	public void testfunc(String val1, double d, int val3, char c) {
+		List<MetaDataInput> lst = new ArrayList<>();
+		// 应该写一个类专门负责生成MetaDataInput对象
+		lst.add(new MetaDataInput(1, val1.getClass(), val1));
+		Double tmpd = d;
+		lst.add(new MetaDataInput(2, tmpd.getClass(), tmpd));
+		Integer tmpval3 = val3;
+		lst.add(new MetaDataInput(3, tmpval3.getClass(), tmpval3));
+		Character tmpc = c;
+		lst.add(new MetaDataInput(4, tmpc.getClass(), tmpc));
+		context.mainCall("1", lst);
 	}
 	
 	@Test
@@ -52,5 +69,9 @@ public class TestMain {
 			}
 			System.out.println("-----------------------------------------------------------");
 		}
+		
+		System.out.println("=================================================================");
+		testfunc("teststr", 0.1, 40000, 'a');
 	}
+	
 }

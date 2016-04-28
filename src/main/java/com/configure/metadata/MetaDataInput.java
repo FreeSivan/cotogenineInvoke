@@ -8,6 +8,16 @@ public class MetaDataInput {
 	
 	private Object object;
 	
+	public MetaDataInput() {
+		
+	}
+	
+	public MetaDataInput(Integer index, Class<?> clazz, Object object) {
+		this.index = index;
+		this.clazz = clazz;
+		this.object = object;
+	}
+	
 	public Integer getIndex() {
 		return index;
 	}

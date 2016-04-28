@@ -26,7 +26,9 @@ public class DispatchXmlParse implements XmlParse{
 		Element element = body.element(ELEMENT_TAG);
 		Attribute attribute = element.attribute(ATTRIBUTE_TAG);
 		String protocolName = attribute.getText();
-		return xmlParseMap.get(protocolName).parse(element);
+		XmlParseData parseData = xmlParseMap.get(protocolName).parse(element);
+		parseData.setProtocolName(protocolName);
+		return parseData;
 	}
 
 	public Map<String, XmlParse> getXmlParseMap() {
