@@ -5,6 +5,7 @@ import java.util.Map;
 import com.configure.callproxy.ICallProxy;
 import com.configure.invoker.Invoker;
 import com.configure.metadata.MetaDataInput;
+import com.configure.metadata.MetaDataParam;
 import com.configure.metadata.XmlParseData;
 
 public class HttpCallProxy implements ICallProxy{
@@ -31,6 +32,7 @@ public class HttpCallProxy implements ICallProxy{
 
 	@Override
 	public void call(Map<Integer, MetaDataInput> input) {
+		Map<String, MetaDataParam> paramMap = parseData.getParamMap();
 		for (Integer item : input.keySet()) {
 			System.out.println("item = "+item);
 			Class<?> clazz = input.get(item).getClazz();
