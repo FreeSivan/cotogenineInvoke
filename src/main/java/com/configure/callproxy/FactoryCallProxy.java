@@ -24,11 +24,11 @@ public class FactoryCallProxy {
 	}
 	
 	public CallProxy getHttpCallProxy() {
-		return new HttpCallProxy();
+		return new CallProxyHttp();
 	}
 	
 	public CallProxy getLocalCallProxy() {
-		return new LocalCallProxy();
+		return new CallProxyLocal();
 	}
 	
 }

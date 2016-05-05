@@ -13,7 +13,7 @@ import org.dom4j.io.SAXReader;
 
 import com.configure.callproxy.CallProxy;
 import com.configure.callproxy.FactoryCallProxy;
-import com.configure.callproxy.HttpCallProxy;
+import com.configure.callproxy.CallProxyHttp;
 import com.configure.exception.InvokerIDconfilct;
 import com.configure.metadata.MetaDataInput;
 import com.configure.metadata.MetaDataParam;
