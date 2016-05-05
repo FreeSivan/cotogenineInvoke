@@ -7,43 +7,22 @@ import org.dom4j.Element;
 import com.configure.metadata.MetaDataParam;
 import com.configure.metadata.MetaDataRet;
 import com.configure.metadata.XmlParseData;
+import com.configure.util.CConst;
 import com.configure.xmlparse.XmlParse;
 
 public class HttpXmlParse implements XmlParse{
 	
-	private static final String PARAMS_TAG = "params";
-	
-	private static final String PARAM_TAG = "param";
-	
-	private static final String RETS_TAG = "returnValues";
-	
-	private static final String RET_TAG = "returnValue";
-	
-	private static final String PARAMINDEX_TAG = "paramIndex";
-	
-	private static final String PARAMTYPE_TAG = "paramType";
-	
-	private static final String PARAMNAME_TAG = "paramName";
-	
-	private static final String PARAMVALUE_TAG = "paramValue";
-	
-	private static final String RETTYPE_TAG = "name";
-	
-	private static final String RETNAME_TAG = "type";
-	
-	private static final String RETVALUE_TAG = "value";
-	
-	@SuppressWarnings("unchecked")
 	@Override
 	public XmlParseData parse(Element body) {
 		XmlParseData parseData = new XmlParseData();
+		@SuppressWarnings("unchecked")
 		Iterator<Element> iterator = body.elementIterator();
 		while(iterator.hasNext()) {
 			Element element = iterator.next();
-			if (PARAMS_TAG.equals(element.getName())) {
+			if (CConst.TAG_PARAMS.equals(element.getName())) {
 				parseParam(element, parseData);
 			}
-			else if (RETS_TAG.equals(element.getName())) {
+			else if (CConst.TAG_RETS.equals(element.getName())) {
 				parseRet(element, parseData);
 			}
 			else {
@@ -65,13 +44,13 @@ public class HttpXmlParse implements XmlParse{
 		Iterator<Element> iterator = element.elementIterator();
 		while (iterator.hasNext()) {
 			Element item = iterator.next();
-			if (!RET_TAG.equals(item.getName())) {
+			if (!CConst.TAG_RET.equals(item.getName())) {
 				continue;
 			}
 			MetaDataRet ret = new MetaDataRet();
-			ret.setRetName(item.element(RETNAME_TAG).getTextTrim());
-			ret.setRetType(item.element(RETTYPE_TAG).getTextTrim());
-			ret.setRetVal(item.element(RETVALUE_TAG).getTextTrim());
+			ret.setRetName(item.element(CConst.TAG_RETNAME).getTextTrim());
+			ret.setRetType(item.element(CConst.TAG_RETTYPE).getTextTrim());
+			ret.setRetVal(item.element(CConst.TAG_RETVALUE).getTextTrim());
 			parseData.getRetMap().put(ret.getRetName(), ret);
 		}
 	}
@@ -86,14 +65,14 @@ public class HttpXmlParse implements XmlParse{
 		Iterator<Element> iterator = element.elementIterator();
 		while (iterator.hasNext()) {
 			Element param = iterator.next();
-			if (!PARAM_TAG.equals(param.getName())) {
+			if (!CConst.TAG_PARAM.equals(param.getName())) {
 				continue;
 			}
 			MetaDataParam data = new MetaDataParam();
-			data.setParamIndex(param.element(PARAMINDEX_TAG).getTextTrim());
-			data.setParamType(param.element(PARAMTYPE_TAG).getTextTrim());
-			data.setParamName(param.element(PARAMNAME_TAG).getTextTrim());
-			data.setParamValue(param.element(PARAMVALUE_TAG).getTextTrim());
+			data.setParamIndex(param.element(CConst.TAG_PARAMINDEX).getTextTrim());
+			data.setParamType(param.element(CConst.TAG_PARAMTYPE).getTextTrim());
+			data.setParamName(param.element(CConst.TAG_PARAMNAME).getTextTrim());
+			data.setParamValue(param.element(CConst.TAG_PARAMVALUE).getTextTrim());
 			parseData.getParamMap().put(data.getParamIndex(), data);
 		}
 	}

@@ -6,22 +6,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.params.HttpParams;
 import org.apache.http.util.EntityUtils;
 
 import com.configure.metadata.MetaDataInput;
 import com.configure.metadata.MetaDataParam;
+import com.configure.util.CConst;
 
 public class CallProxyHttp extends CallProxy{
 
@@ -34,11 +31,11 @@ public class CallProxyHttp extends CallProxy{
 			System.out.println("class = "+clazz.getName());
 			System.out.println("value = "+clazz.cast(object));
 		}
-		String method = getParseData().getOtherdata().getFromDataMap("method");
-		if ("post".equals(method)) {
+		String method = getParseData().getOtherdata().getFromDataMap(CConst.TAG_METHOD);
+		if (CConst.TAG_METHOD_POST.equals(method)) {
 			postCall(input);
 		}
-		else if("get".equals(method)) {
+		else if(CConst.TAG_METHOD_GET.equals(method)) {
 			getCall(input);
 		}
 	}
@@ -50,20 +47,17 @@ public class CallProxyHttp extends CallProxy{
 
 	private void postCall(Map<Integer, MetaDataInput> input) {
 		Map<String, MetaDataParam> paramMap = getParseData().getParamMap();
-		String url = getParseData().getOtherdata().getFromDataMap("url");
-		String encode = getParseData().getOtherdata().getFromDataMap("encode");
+		String url = getParseData().getOtherdata().getFromDataMap(CConst.TAG_URL);
+		String encode = getParseData().getOtherdata().getFromDataMap(CConst.TAG_ENCODE);
 		HttpClient httpclient = HttpClients.createDefault();
 		HttpPost post = new HttpPost(url);
 		List<NameValuePair> list = new ArrayList<NameValuePair>();
 		for (Integer item : input.keySet()) {
 			String index = item.toString();
 			String tagname = paramMap.get(index).getParamName();
-			System.out.println("item = "+item);
 			Class<?> clazz = input.get(item).getClazz();
 			Object object = input.get(item).getObject();
 			clazz.cast(object);
-			System.out.println("class = "+clazz.getName());
-			System.out.println("value = "+clazz.cast(object));
 			list.add(new BasicNameValuePair(tagname, (String) clazz.cast(object)));
 		}
 		try {
