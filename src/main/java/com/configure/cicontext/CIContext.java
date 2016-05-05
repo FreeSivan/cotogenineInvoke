@@ -11,17 +11,19 @@ import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
-import com.configure.callproxy.ICallProxy;
-import com.configure.callproxy.impl.HttpCallProxy;
+import com.configure.callproxy.CallProxy;
+import com.configure.callproxy.FactoryCallProxy;
+import com.configure.callproxy.HttpCallProxy;
 import com.configure.exception.InvokerIDconfilct;
 import com.configure.metadata.MetaDataInput;
 import com.configure.metadata.MetaDataParam;
 import com.configure.metadata.XmlParseData;
+import com.configure.util.CConst;
 import com.configure.xmlparse.XmlParse;
 
 public class CIContext {
 	
-	private Map<String, ICallProxy> cpMap = new HashMap<String, ICallProxy>();
+	private Map<String, CallProxy> cpMap = new HashMap<String, CallProxy>();
 
 	private XmlParse xmlparse;
 	
@@ -31,7 +33,7 @@ public class CIContext {
 	 * @param invoker
 	 * @throws InvokerIDconfilct
 	 */
-	public void addInvoker(String invokerName, ICallProxy callProxy) throws InvokerIDconfilct {
+	public void addInvoker(String invokerName, CallProxy callProxy) throws InvokerIDconfilct {
 		if (cpMap.containsKey(invokerName)) {
 			throw new InvokerIDconfilct();
 		}
@@ -52,12 +54,12 @@ public class CIContext {
 		Iterator<Element> iterator = root.elementIterator();
 		while (iterator.hasNext()) {
 			Element element = iterator.next();
-			if (!"invoke".equals(element.getName())) {
+			if (!CConst.TAG_INVOKE.equals(element.getName())) {
 				continue;
 			}
 			XmlParseData parseData = xmlparse.parse(element);
-			String invokeID = element.attribute("id").getText();
-			ICallProxy callProxy = new HttpCallProxy();
+			String invokeID = element.attribute(CConst.TAG_ID).getText();
+			CallProxy callProxy = FactoryCallProxy.instance().getCallProxy(parseData.getProtocolName());
 			callProxy.setParseData(parseData);
 			addInvoker(invokeID, callProxy);
 		}
@@ -72,7 +74,7 @@ public class CIContext {
 		cpMap.get(id).call(map);
 	}
 	
-	public Map<String, ICallProxy> getCpMap() {
+	public Map<String, CallProxy> getCpMap() {
 		return cpMap;
 	}
 

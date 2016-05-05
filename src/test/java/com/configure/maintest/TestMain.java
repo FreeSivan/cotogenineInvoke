@@ -9,7 +9,7 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
-import com.configure.callproxy.ICallProxy;
+import com.configure.callproxy.CallProxy;
 import com.configure.cicontext.CIContext;
 import com.configure.exception.InvokerIDconfilct;
 import com.configure.metadata.MetaDataInput;
@@ -47,9 +47,9 @@ public class TestMain {
 		context = (CIContext)ac.getBean("context");
 		context.parseXml("ciconf.xml");
 		
-		Map<String, ICallProxy> cpMap = context.getCpMap();
+		Map<String, CallProxy> cpMap = context.getCpMap();
 		for (String key1 : cpMap.keySet()) {
-			ICallProxy callProxy = cpMap.get(key1);
+			CallProxy callProxy = cpMap.get(key1);
 			XmlParseData parseData = callProxy.getParseData();
 			System.out.println("method = " + parseData.getOtherdata().getFromDataMap("method"));
 			System.out.println("url    = " + parseData.getOtherdata().getFromDataMap("url"));
