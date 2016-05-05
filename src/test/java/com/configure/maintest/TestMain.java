@@ -27,16 +27,14 @@ public class TestMain {
 	}
 	
 	
-	public void testfunc(String val1, double d, int val3, char c) {
+	public void testfunc(String str1, String str2, String str3, String str4, String str5) {
 		List<MetaDataInput> lst = new ArrayList<>();
 		// 应该写一个类专门负责生成MetaDataInput对象
-		lst.add(new MetaDataInput(1, val1.getClass(), val1));
-		Double tmpd = d;
-		lst.add(new MetaDataInput(2, tmpd.getClass(), tmpd));
-		Integer tmpval3 = val3;
-		lst.add(new MetaDataInput(3, tmpval3.getClass(), tmpval3));
-		Character tmpc = c;
-		lst.add(new MetaDataInput(4, tmpc.getClass(), tmpc));
+		lst.add(new MetaDataInput(1, str1.getClass(), str1));
+		lst.add(new MetaDataInput(2, str2.getClass(), str2));
+		lst.add(new MetaDataInput(3, str3.getClass(), str3));
+		lst.add(new MetaDataInput(4, str4.getClass(), str4));
+		lst.add(new MetaDataInput(5, str5.getClass(), str5));
 		context.mainCall("1", lst);
 	}
 	
@@ -71,7 +69,8 @@ public class TestMain {
 		}
 		
 		System.out.println("=================================================================");
-		testfunc("teststr", 0.1, 40000, 'a');
+		testfunc("1775919300_1460715613_h.wav", "xiamimp3-lossless/650/1506611650/2100314426", 
+				"1200", "1771197124_1460716354453", "xiamimp3/838/107838/531294");
 	}
 	
 }

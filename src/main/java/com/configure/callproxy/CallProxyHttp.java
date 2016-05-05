@@ -1,6 +1,24 @@
 package com.configure.callproxy;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.params.HttpParams;
+import org.apache.http.util.EntityUtils;
 
 import com.configure.metadata.MetaDataInput;
 import com.configure.metadata.MetaDataParam;
@@ -9,8 +27,6 @@ public class CallProxyHttp extends CallProxy{
 
 	@Override
 	public void call(Map<Integer, MetaDataInput> input) {
-		@SuppressWarnings("unused")
-		Map<String, MetaDataParam> paramMap = getParseData().getParamMap();
 		for (Integer item : input.keySet()) {
 			System.out.println("item = "+item);
 			Class<?> clazz = input.get(item).getClazz();
@@ -33,7 +49,37 @@ public class CallProxyHttp extends CallProxy{
 	}
 
 	private void postCall(Map<Integer, MetaDataInput> input) {
-		// TODO Auto-generated method stub
+		Map<String, MetaDataParam> paramMap = getParseData().getParamMap();
+		String url = getParseData().getOtherdata().getFromDataMap("url");
+		String encode = getParseData().getOtherdata().getFromDataMap("encode");
+		HttpClient httpclient = HttpClients.createDefault();
+		HttpPost post = new HttpPost(url);
+		List<NameValuePair> list = new ArrayList<NameValuePair>();
+		for (Integer item : input.keySet()) {
+			String index = item.toString();
+			String tagname = paramMap.get(index).getParamName();
+			System.out.println("item = "+item);
+			Class<?> clazz = input.get(item).getClazz();
+			Object object = input.get(item).getObject();
+			clazz.cast(object);
+			System.out.println("class = "+clazz.getName());
+			System.out.println("value = "+clazz.cast(object));
+			list.add(new BasicNameValuePair(tagname, (String) clazz.cast(object)));
+		}
+		try {
+			UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(list,encode);
+			post.setEntity(uefEntity);
+			HttpResponse httpResponse = httpclient.execute(post);
+			String json = EntityUtils.toString(httpResponse.getEntity());
+			System.out.println(json);
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (ClientProtocolException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 

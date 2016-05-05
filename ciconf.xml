@@ -1,18 +1,37 @@
 <CIConfigure>
 	<invoke id="1">
 		<protocol name="http">
-			<url>usr1</url>
-			<method>method1</method>
+			<url>http://10.101.72.165:8000/s/audio_compress_asyn</url>
+			<method>post</method>
+			<encode>UTF-8</encode>
 			<params>
 				<param>
-					<paramIndex>index11</paramIndex>
-					<paramName>name11</paramName>
+					<paramIndex>1</paramIndex>
+					<paramName>rawDataName</paramName>
 					<paramType>type11</paramType>
 					<paramValue>value11</paramValue>
 				</param>
 				<param>
-					<paramIndex>index12</paramIndex>
-					<paramName>name12</paramName>
+					<paramIndex>2</paramIndex>
+					<paramName>rawDataUrl</paramName>
+					<paramType>type12</paramType>
+					<paramValue>value12</paramValue>
+				</param>
+				<param>
+					<paramIndex>3</paramIndex>
+					<paramName>codeRate</paramName>
+					<paramType>type12</paramType>
+					<paramValue>value12</paramValue>
+				</param>
+				<param>
+					<paramIndex>4</paramIndex>
+					<paramName>compressName</paramName>
+					<paramType>type12</paramType>
+					<paramValue>value12</paramValue>
+				</param>
+				<param>
+					<paramIndex>5</paramIndex>
+					<paramName>compressUrl</paramName>
 					<paramType>type12</paramType>
 					<paramValue>value12</paramValue>
 				</param>
