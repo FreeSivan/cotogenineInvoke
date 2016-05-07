@@ -29,7 +29,7 @@ public class TestMain {
 	
 	public void testfunc(String str1, String str2, String str3, String str4, String str5) {
 		List<MetaDataInput> lst = new ArrayList<>();
-		// 应该写一个类专门负责生成MetaDataInput对象
+
 		lst.add(new MetaDataInput(1, str1.getClass(), str1));
 		lst.add(new MetaDataInput(2, str2.getClass(), str2));
 		lst.add(new MetaDataInput(3, str3.getClass(), str3));
